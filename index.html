@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="2026년 면적직불금 예상 지급액을 농지 유형과 면적으로 간편하게 계산해 보세요.">
+<title>2026년 공익직불금 간편 계산기 | 생활ZIP</title>
+<style>
+:root{font-family:system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',sans-serif;color:#17261f;background:#f3f7f3}*{box-sizing:border-box}body{margin:0;padding:24px 12px}.wrap{max-width:690px;margin:0 auto}.panel{background:white;border:1px solid #dce7dc;border-radius:22px;padding:28px;box-shadow:0 10px 36px #183c2912}.eyebrow{color:#267647;font-weight:800;font-size:13px;letter-spacing:.04em}h1{font-size:clamp(23px,5vw,32px);line-height:1.4;margin:10px 0}p{line-height:1.7;color:#516357}.intro{margin:0 0 25px}.step{font-weight:800;font-size:17px;margin:26px 0 12px}.choices{display:grid;gap:9px}.choice{display:flex;align-items:center;gap:10px;min-height:52px;padding:13px 14px;border:1px solid #d7e3d7;border-radius:12px;cursor:pointer;background:#fff}.choice:has(input:checked){border:2px solid #25824e;background:#f0fbf3;padding:12px 13px}.choice input{accent-color:#20804b;width:18px;height:18px}.units{display:flex;gap:8px;flex-wrap:wrap}.units label{cursor:pointer}.units input{position:absolute;opacity:0}.units span{display:inline-block;border:1px solid #d5e0d5;padding:10px 17px;border-radius:10px;font-weight:700}.units input:checked+span{background:#167243;color:white;border-color:#167243}.field{display:flex;align-items:center;border:1px solid #cbd9ce;border-radius:12px;overflow:hidden;margin-top:12px}.field input{width:100%;border:0;outline:none;padding:16px;font-size:20px;font-weight:700;min-width:0}.field span{padding:0 18px;color:#506256;font-weight:700}.hint,.note{font-size:13px;color:#68776d}.error{color:#bd3535;font-size:14px;min-height:20px}.result{margin-top:26px;border-radius:17px;background:#eaf7ee;padding:24px 20px;text-align:center}.result-label{color:#2d6847;font-weight:800}.amount{font-size:clamp(28px,7vw,43px);font-weight:900;color:#17653c;letter-spacing:-.04em;margin:8px 0}.detail{margin:20px 0 0}.detail div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #e5ece5;padding:12px 0;font-size:14px}.detail strong{white-space:nowrap}.buttons{display:flex;gap:10px;margin-top:21px}.buttons button{flex:1;border:0;border-radius:11px;padding:13px 8px;cursor:pointer;font-size:15px;font-weight:800;background:#167243;color:white}.buttons button.secondary{background:#eaf0ec;color:#30473a}.alert{margin-top:20px;background:#f7f8f4;border-left:4px solid #b1bda9;padding:12px 14px;border-radius:8px;color:#4f5b51;font-size:13px;line-height:1.7}.rates{border-collapse:collapse;width:100%;font-size:13px;margin-top:12px}.rates th,.rates td{border:1px solid #e0e6df;padding:10px 6px;text-align:center}.rates th{background:#f0f6f0}.small{font-size:12px;color:#64736a;text-align:center;margin:20px 0 0}@media(max-width:460px){.panel{padding:18px}.buttons{flex-direction:column}.rates{font-size:11px}.rates th,.rates td{padding:8px 3px}}
+</style>
+</head>
+<body><main class="wrap"><section class="panel"><div class="eyebrow">생활ZIP · 2026년 농업인 지원정보</div><h1>🌾 우리 부모님 농지는 얼마 받을까?</h1><p class="intro">농지 유형과 면적만 입력하면 <b>2026년 면적직불금 단순 예상액</b>을 즉시 계산합니다.</p>
+<div class="step">① 농지 유형을 선택하세요</div><div class="choices" role="radiogroup" aria-label="농지 유형">
+<label class="choice"><input type="radio" name="land" value="zone" checked>농업진흥지역 논·밭</label>
+<label class="choice"><input type="radio" name="land" value="rice">농업진흥지역 밖 논</label>
+<label class="choice"><input type="radio" name="land" value="field">농업진흥지역 밖 밭</label></div>
+<div class="step">② 면적 단위를 선택하세요</div><div class="units" role="radiogroup" aria-label="면적 단위"><label><input type="radio" name="unit" value="ha" checked><span>ha</span></label><label><input type="radio" name="unit" value="sqm"><span>㎡</span></label><label><input type="radio" name="unit" value="pyeong"><span>평</span></label></div>
+<label class="step" for="area" style="display:block">③ 농지 면적을 입력하세요</label><div class="field"><input id="area" type="number" inputmode="decimal" min="0" step="any" value="1" aria-describedby="areaHint validation"><span id="unitText">ha</span></div><p class="hint" id="areaHint">1ha = 10,000㎡ ≈ 3,025평</p><div class="error" id="validation" role="status"></div>
+<section class="result" aria-live="polite"><div class="result-label">면적직불금 단순 예상액</div><div class="amount" id="total">2,150,000원</div><div id="conversion" class="hint">1ha · 약 3,025평</div></section>
+<div class="detail"><div><span>2ha 이하 구간</span><strong id="tier1">2,150,000원</strong></div><div><span>2ha 초과~6ha 이하 구간</span><strong id="tier2">0원</strong></div><div><span>6ha 초과 구간</span><strong id="tier3">0원</strong></div><div><span>계산 적용 면적</span><strong id="usedArea">1ha</strong></div></div>
+<div class="buttons"><button id="copy" type="button">📋 계산 결과 복사</button><button id="reset" class="secondary" type="button">↻ 다시 계산</button></div>
+<div class="alert"><b>계산 전 꼭 확인하세요.</b><br>이 계산기는 <b>한 가지 농지 유형</b>에 대해 개인 농업인의 지급상한 <b>30ha</b>를 적용한 단순 예시입니다. 소농직불금(요건 충족 시 농가당 130만 원) 대상 여부, 농업법인, 복수 유형 농지, 실제 적격면적, 감액·제외 사유 등은 반영하지 않습니다. 실제 금액은 담당 읍·면·동 행정복지센터에서 확인하세요.</div>
+<h2 style="font-size:18px;margin-top:30px">2026년 면적직불금 단가</h2><table class="rates"><thead><tr><th>농지 유형</th><th>2ha 이하</th><th>2~6ha</th><th>6ha 초과</th></tr></thead><tbody><tr><td>농업진흥지역 논·밭</td><td>215만</td><td>207만</td><td>198만</td></tr><tr><td>농업진흥지역 밖 논</td><td>187만</td><td>179만</td><td>170만</td></tr><tr><td>농업진흥지역 밖 밭</td><td>150만</td><td>143만</td><td>136만</td></tr></tbody></table><p class="hint">단위: 각 면적 구간별 1ha당 단가. 여러 구간은 구간별로 나누어 계산합니다.</p><p class="small">© 생활ZIP · 공익직불금 참고용 계산기</p>
+</section></main>
+<script>
+(function(){'use strict';
+ const rates={zone:[215,207,198],rice:[187,179,170],field:[150,143,136]};
+ const names={zone:'농업진흥지역 논·밭',rice:'농업진흥지역 밖 논',field:'농업진흥지역 밖 밭'};
+ const $=id=>document.getElementById(id);
+ const money=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+ const fmt=n=>Number(n.toFixed(4)).toLocaleString('ko-KR',{maximumFractionDigits:4});
+ let last='';
+ function calculate(){
+  const type=document.querySelector('input[name="land"]:checked').value;
+  const unit=document.querySelector('input[name="unit"]:checked').value;
+  const num=Number($('area').value);
+  $('unitText').textContent=unit==='sqm'?'㎡':unit==='pyeong'?'평':'ha';
+  if(!$('area').value.trim()||!Number.isFinite(num)||num<=0){$('validation').textContent='0보다 큰 농지 면적을 입력하세요.';['total','tier1','tier2','tier3'].forEach(id=>$(id).textContent='—');$('usedArea').textContent='—';$('conversion').textContent='—';$('copy').disabled=true;return;}
+  $('validation').textContent='';$('copy').disabled=false;
+  const ha=unit==='sqm'?num/10000:unit==='pyeong'?num*3.305785/10000:num;
+  const area=Math.min(30,ha);
+  const [r1,r2,r3]=rates[type];
+  const a=Math.min(2,area)*r1*10000;
+  const b=Math.max(0,Math.min(area-2,4))*r2*10000;
+  const c=Math.max(0,area-6)*r3*10000;
+  const total=Math.round(a+b+c);
+  $('total').textContent=money(total);$('tier1').textContent=money(a);$('tier2').textContent=money(b);$('tier3').textContent=money(c);$('usedArea').textContent=fmt(area)+'ha';
+  $('conversion').textContent=fmt(ha)+'ha · 약 '+Math.round(ha*10000/3.305785).toLocaleString('ko-KR')+'평'+(ha>30?' (개인 지급상한 30ha 적용)':'');
+  last='2026년 면적직불금 단순 예상액\n농지 유형: '+names[type]+'\n입력 면적: '+fmt(ha)+'ha\n예상 금액: '+money(total)+'\n※ 실제 수급자격과 지급액은 지자체에 확인하세요.';
+ }
+ document.querySelectorAll('input[name="land"],input[name="unit"]').forEach(e=>e.addEventListener('change',calculate));
+ $('area').addEventListener('input',calculate);
+ $('reset').addEventListener('click',()=>{document.querySelector('input[name="land"][value="zone"]').checked=true;document.querySelector('input[name="unit"][value="ha"]').checked=true;$('area').value='1';calculate();});
+ $('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(last);$('copy').textContent='✓ 복사 완료';setTimeout(()=>$('copy').textContent='📋 계산 결과 복사',1800);}catch(e){const box=document.createElement('textarea');box.value=last;document.body.appendChild(box);box.select();const ok=document.execCommand('copy');box.remove();$('copy').textContent=ok?'✓ 복사 완료':'복사할 수 없습니다';setTimeout(()=>$('copy').textContent='📋 계산 결과 복사',1800);}});
+ calculate();
+})();
+</script>
+</body></html>
